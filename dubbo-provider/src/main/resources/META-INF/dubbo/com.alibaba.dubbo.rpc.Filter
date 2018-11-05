@@ -1,0 +1,1 @@
+validationFilter=org.dante.springboot.dubbo.filter.ValidationFilter

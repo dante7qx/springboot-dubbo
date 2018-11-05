@@ -1,0 +1,18 @@
+server:
+  port: 8802
+logging:
+  level:
+    root: info
+    org.dante.spring.dubbo: debug
+spring:
+  dubbo:
+    application:
+      id: consumer-test-2
+      name: consumer-test-2
+      logger: slf4j
+    registry: 
+      address: zookeeper://spiritint-dubbo-zook.xiaohehe.com:31861
+    consumer:
+      check: false
+    reference:
+      check: false

@@ -1,0 +1,23 @@
+version: "2"
+services:
+  zookeeper:
+    image: 'zookeeper:3.4'
+    hostname: zookeeper
+  producer:
+    image: 'hub.hcpaas.com/dante/dubbo-provider:v1'
+    links:
+    - zookeeper
+    environment:
+      - zk_address=zookeeper:2181
+      - DUBBO_IP_TO_REGISTRY=10.71.226.138
+      - DUBBO_PORT_TO_REGISTRY=20880
+    ports:
+      - 10.71.226.138:20880:20880
+  consumer:
+    image: 'hub.hcpaas.com/dante/dubbo-consumer:v1'
+    links:
+    - zookeeper
+    environment:
+      - zk_address=zookeeper:2181
+    ports:
+      - 8080:8080
