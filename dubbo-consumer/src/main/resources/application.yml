@@ -10,8 +10,10 @@ spring:
       id: consumer-test-2
       name: consumer-test-2
       logger: slf4j
+      qos:
+        port: 22223
     registry: 
-      address: zookeeper://spiritint-dubbo-zook.xiaohehe.com:31861
+      address: zookeeper://127.0.0.1:2181
     consumer:
       check: false
     reference:

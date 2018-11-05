@@ -14,15 +14,7 @@ spring:
     provider:
       filter: validationFilter
     registry:
-      address: zookeeper://spiritint-dubbo-zook.xiaohehe.com:31861
+      address: zookeeper://127.0.0.1:2181
     protocol: 
       name: dubbo
       port: 20880      
-      
-#spring.dubbo.application.id=dubbo-Test
-#spring.dubbo.application.name=dubbo-Test
-#spring.dubbo.provider.filter=dubboLogFilter
-#spring.dubbo.registry.address=zookeeper://127.0.0.1:2181
-#spring.dubbo.server=true
-#spring.dubbo.protocol.name=dubbo
-#spring.dubbo.protocol.port=20880
