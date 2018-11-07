@@ -41,6 +41,7 @@ public class DubboConfig {
 	public ProtocolConfig protocolConfig() {
 		ProtocolConfig protocolConfig = new ProtocolConfig();
 		protocolConfig.setName("dubbo");
+//		protocolConfig.setHost("peer2");
 		protocolConfig.setPort(zkDubbo);
 		return protocolConfig;
 	}
