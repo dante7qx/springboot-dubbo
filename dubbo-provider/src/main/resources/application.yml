@@ -6,3 +6,8 @@ logging:
     org.dante.spring.dubbo: debug
 zk:
   address: 127.0.0.1:2181
+#  address: spirit-dubbo-zk.caas.poc.com:30012
+  dubbo: 20880
+  qos: 22222
+  
+  

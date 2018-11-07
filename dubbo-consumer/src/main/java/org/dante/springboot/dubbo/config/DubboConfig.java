@@ -11,15 +11,22 @@ import com.alibaba.dubbo.config.RegistryConfig;
 @Configuration
 public class DubboConfig {
 	
+	@Value("${zk.appName}")
+	private String appName;
+	
 	@Value("${zk.address}")
 	private String zkAddress;
+	
+	@Value("${zk.qosPort}")
+	private int qosPort;
 	
 	@Bean
     public ApplicationConfig applicationConfig() {
         ApplicationConfig applicationConfig = new ApplicationConfig();
-        applicationConfig.setName("consumer-test");
+        applicationConfig.setId(appName);
+        applicationConfig.setName(appName);
         applicationConfig.setLogger("slf4j");
-        applicationConfig.setQosPort(2223);
+        applicationConfig.setQosPort(qosPort);
         return applicationConfig;
     }
 
@@ -27,6 +34,7 @@ public class DubboConfig {
     public ConsumerConfig consumerConfig() {
         ConsumerConfig consumerConfig = new ConsumerConfig();
         consumerConfig.setTimeout(3000);
+        consumerConfig.setRetries(2);
         return consumerConfig;
     }
 

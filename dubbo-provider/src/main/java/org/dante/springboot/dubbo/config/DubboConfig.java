@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.alibaba.dubbo.config.ApplicationConfig;
+import com.alibaba.dubbo.config.ProtocolConfig;
 import com.alibaba.dubbo.config.ProviderConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 
@@ -13,12 +14,17 @@ public class DubboConfig {
 	
 	@Value("${zk.address}")
 	private String zkAddress;
+	@Value("${zk.dubbo}")
+	private int zkDubbo;
+	@Value("${zk.qos}")
+	private int zkQos;
 	
 	@Bean
 	public ApplicationConfig applicationConfig() {
 		ApplicationConfig applicationConfig = new ApplicationConfig();
 		applicationConfig.setId("provider-test");
 		applicationConfig.setName("provider-test");
+		applicationConfig.setQosPort(zkQos);
 		applicationConfig.setLogger("slf4j");
 		return applicationConfig;
 	}
@@ -28,9 +34,15 @@ public class DubboConfig {
 		RegistryConfig registryConfig = new RegistryConfig();
 		registryConfig.setAddress("zookeeper://".concat(zkAddress));
 		registryConfig.setClient("curator");
-		registryConfig.setProtocol("dubbo");
-		registryConfig.setPort(20880);
 		return registryConfig;
+	}
+	
+	@Bean
+	public ProtocolConfig protocolConfig() {
+		ProtocolConfig protocolConfig = new ProtocolConfig();
+		protocolConfig.setName("dubbo");
+		protocolConfig.setPort(zkDubbo);
+		return protocolConfig;
 	}
 	
 	@Bean

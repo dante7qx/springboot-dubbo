@@ -16,7 +16,7 @@
 	<description>Dante Springboot Dubbo Provider</description>
 
 	<properties>
-		<docker.image.prefix>docker-dubbo</docker.image.prefix>
+		<docker.image>harbor.poc.com/spirit/dubbo-provider:x6</docker.image>
 	</properties>
 
 	<dependencies>
@@ -71,7 +71,7 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.4.14</version>
 				<configuration>
-					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<imageName>${docker.image}</imageName>
 					<dockerDirectory>src/main/docker</dockerDirectory>
 					<resources>
 						<resource>
