@@ -11,14 +11,14 @@ import com.alibaba.dubbo.config.RegistryConfig;
 
 @Configuration
 public class DubboConfig {
-	
+
 	@Value("${zk.address}")
 	private String zkAddress;
 	@Value("${zk.dubbo}")
 	private int zkDubbo;
 	@Value("${zk.qos}")
 	private int zkQos;
-	
+
 	@Bean
 	public ApplicationConfig applicationConfig() {
 		ApplicationConfig applicationConfig = new ApplicationConfig();
@@ -37,7 +37,7 @@ public class DubboConfig {
 		registryConfig.setClient("curator");
 		return registryConfig;
 	}
-	
+
 	@Bean
 	public ProtocolConfig protocolConfig() {
 		ProtocolConfig protocolConfig = new ProtocolConfig();
@@ -46,11 +46,12 @@ public class DubboConfig {
 		protocolConfig.setPort(zkDubbo);
 		return protocolConfig;
 	}
-	
+
 	@Bean
 	public ProviderConfig providerConfig() {
 		ProviderConfig providerConfig = new ProviderConfig();
 		providerConfig.setFilter("validationFilter");
 		return providerConfig;
 	}
+
 }

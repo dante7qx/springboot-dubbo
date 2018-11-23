@@ -1,12 +1,12 @@
 server:
-  port: 8802
+  port: 8082
 logging:
   level:
     root: info
     org.dante.spring.dubbo: debug
 zk:
-#  address: 127.0.0.1:2181
-  address: 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+  address: 127.0.0.1:2181
+#  address: 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
 #  address: spirit-dubbo-zk.caas.poc.com:30012
   appName: consumer-test-1
-  qosPort: 22223
+  qosPort: 22232

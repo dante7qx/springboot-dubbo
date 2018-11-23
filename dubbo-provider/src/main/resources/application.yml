@@ -1,14 +1,28 @@
-server:
-  port: 8801
+spring:
+  profiles:
+    active: node1
 logging:
   level:
     root: info
     org.dante.spring.dubbo: debug
 zk:
-#  address: 127.0.0.1:2181
-  address: 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+  address: 127.0.0.1:2181
+#  address: 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
 #  address: spirit-dubbo-zk.caas.poc.com:30012
+---
+spring:
+  profiles: node1
+server:
+  port: 8801
+zk:
   dubbo: 20880
   qos: 22222
-  
-  
+
+---
+spring:
+  profiles: node2
+server:
+  port: 8802
+zk:
+  dubbo: 20881
+  qos: 22223

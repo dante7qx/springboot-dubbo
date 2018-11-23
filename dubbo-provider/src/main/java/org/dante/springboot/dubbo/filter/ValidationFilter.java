@@ -17,7 +17,7 @@ public class ValidationFilter implements Filter {
 	@Override
 	public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
 		String accessToken = RpcContext.getContext().getAttachment("accessToken");
-		log.info("AccessToken({}) ======> {}", accessToken.length(), accessToken);
+		log.info("AccessToken({}) ======> {}", accessToken);
 //		if(accessToken.length() < 32) {
 //			return new RpcResult(new Exception(accessToken.concat("没有访问权限")));
 //		}
