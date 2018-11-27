@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: node1
+  main:
+    web-application-type: none
 logging:
   level:
     root: info
@@ -12,8 +14,6 @@ zk:
 ---
 spring:
   profiles: node1
-server:
-  port: 8801
 zk:
   dubbo: 20880
   qos: 22222
@@ -21,8 +21,6 @@ zk:
 ---
 spring:
   profiles: node2
-server:
-  port: 8802
 zk:
   dubbo: 20881
   qos: 22223

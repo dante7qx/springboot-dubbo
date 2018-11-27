@@ -15,7 +15,7 @@
 	<description>Dante Springboot Dubbo Consumer</description>
 	
 	<properties>
-		<docker.image>harbor.poc.com/spirit/dubbo-consumer:x5</docker.image>
+		<docker.image>harbor.air.haihangyun.com/spiritdev/dubbo-consumer:v1</docker.image>
 	</properties>
 	
 	<dependencies>
