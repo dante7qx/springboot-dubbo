@@ -11,12 +11,11 @@ import com.alibaba.dubbo.rpc.RpcContext;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Service(retries = 0, timeout = 5000, loadbalance = "roundrobin")
+@Service(retries = 0, timeout = 5000, loadbalance = "roundrobin", protocol="dubbo")
 public class AnnotateService implements IAnnotateService {
 
 	@Override
 	public String sayHello(String msg) {
-
 		try {
 			String localAddr = InetAddress.getLocalHost().toString();
 			log.info("{} receive request {}", localAddr, msg);

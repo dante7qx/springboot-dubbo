@@ -1,8 +1,8 @@
 spring:
   profiles:
     active: node1
-  main:
-    web-application-type: none
+#  main:
+#    web-application-type: none
 logging:
   level:
     root: info
@@ -14,8 +14,13 @@ zk:
 ---
 spring:
   profiles: node1
+server:
+  port: 8800
+  servlet:
+    context-path: /provider/hessian
 zk:
   dubbo: 20880
+  hessian: 8800
   qos: 22222
 
 ---

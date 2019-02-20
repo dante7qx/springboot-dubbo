@@ -1,5 +1,8 @@
 package org.dante.springboot.dubbo.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +19,8 @@ public class DubboConfig {
 	private String zkAddress;
 	@Value("${zk.dubbo}")
 	private int zkDubbo;
+	@Value("${zk.hessian}")
+	private int zkHessian;
 	@Value("${zk.qos}")
 	private int zkQos;
 
@@ -38,18 +43,31 @@ public class DubboConfig {
 		return registryConfig;
 	}
 
-	@Bean
-	public ProtocolConfig protocolConfig() {
+	@Bean(name="dubbo")
+	public ProtocolConfig dubboProtocolConfig() {
 		ProtocolConfig protocolConfig = new ProtocolConfig();
 		protocolConfig.setName("dubbo");
-//		protocolConfig.setHost("peer2");
 		protocolConfig.setPort(zkDubbo);
+		return protocolConfig;
+	}
+	
+	@Bean(name="hessian")
+	public ProtocolConfig hessianProtocolConfig() {
+		ProtocolConfig protocolConfig = new ProtocolConfig();
+		protocolConfig.setName("hessian");
+		protocolConfig.setPort(zkHessian);
+		protocolConfig.setServer("servlet");
+		protocolConfig.setContextpath("/provider/hessian");
 		return protocolConfig;
 	}
 
 	@Bean
 	public ProviderConfig providerConfig() {
 		ProviderConfig providerConfig = new ProviderConfig();
+		List<ProtocolConfig> protocols = new ArrayList<>();
+		protocols.add(dubboProtocolConfig());
+		protocols.add(hessianProtocolConfig());
+		providerConfig.setProtocols(protocols);
 		providerConfig.setFilter("validationFilter");
 		return providerConfig;
 	}

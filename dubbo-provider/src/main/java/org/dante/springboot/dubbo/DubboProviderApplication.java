@@ -22,6 +22,7 @@ import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
 public class DubboProviderApplication {
 
 	public static void main(String[] args) {
+		/*
 		SpringApplication.run(DubboProviderApplication.class, args).start();
 		BufferedReader br = null;
 		try {
@@ -39,5 +40,7 @@ public class DubboProviderApplication {
 				e.printStackTrace();
 			}
 		}
+		*/
+		SpringApplication.run(DubboProviderApplication.class, args);
 	}
 }
