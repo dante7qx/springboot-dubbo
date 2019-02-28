@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class ConsumerService {
 
-	@Reference(loadbalance = "random")
+	@Reference(loadbalance = "roundrobin")
 	private IAnnotateService annotateService;
 
 	@Reference(timeout = 2000)

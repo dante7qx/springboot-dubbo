@@ -26,6 +26,9 @@ zk:
 ---
 spring:
   profiles: node2
+server:
+  port: 8801
 zk:
   dubbo: 20881
+  hessian: 8801
   qos: 22223
