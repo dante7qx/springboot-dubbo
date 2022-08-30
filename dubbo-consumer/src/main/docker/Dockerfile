@@ -1,17 +1,25 @@
-FROM java:8
-LABEL auther ch.sun <ch.sun@haihangyun.com>
+FROM dante2012/java:centos-oraclejre-1.8.0_212
 
-ENV TZ=Asia/Shanghai
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+LABEL MAINTAINER="sunchao.zh <dante@dante7qx@126.com>"
 
-ENV APPS_HOME=/AppServer
-RUN mkdir -p $APPS_HOME/
-WORKDIR $APPS_HOME/
-ADD dubbo-consumer-0.0.1-SNAPSHOT.jar $APPS_HOME/app.jar
-    
-RUN sh -c 'touch $APPS_HOME/app.jar'
+ENV JAVA_OPTS="-Xms512m -Xmx512m -XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m"
 
-ENV JAVA_OPTS="-Xms1024m -Xmx1024m"
+ARG apUser=spirit
+ARG userHome=/home/spirit
+ARG logHome=/home/ap/logs
+
+RUN set -eux; \
+    groupadd -r ${apUser} --gid=1000; \
+    useradd -r -g ${apUser} --uid=1000 ${apUser}; \
+    mkdir -p ${logHome} ${userHome}; \
+	chown -R ${apUser}:${apUser} ${logHome} ${userHome}
+
+COPY dubbo-consumer-0.0.1-SNAPSHOT.jar /app.jar
+
+USER ${apUser}
 
 EXPOSE 8080
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar $APPS_HOME/app.jar" ]
+
+VOLUME ["${logHome}"]
+
+CMD [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]

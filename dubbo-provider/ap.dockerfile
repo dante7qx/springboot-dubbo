@@ -1,8 +1,10 @@
-FROM dante2012/java:centos-oraclejre-1.8.0_212
+FROM docker.caas.dev.jh/basic/java:centos-oraclejre-1.8.0_212
 
 LABEL MAINTAINER="sunchao.zh <dante@dante7qx@126.com>"
 
-ENV JAVA_OPTS="-Xms512m -Xmx512m -XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m"
+ENV JAVA_OPTS="-Xms512m -Xmx512m -XX:MetaspaceSize=64m - XX:MaxMetaspaceSize=128m"
+ENV DUBBO_IP_TO_REGISTRY=${MY_NODE_IP}
+ENV DUBBO_PORT_TO_REGISTRY=${REG_PORT}
 
 ARG apUser=spirit
 ARG userHome=/home/spirit
@@ -14,7 +16,7 @@ RUN set -eux; \
     mkdir -p ${logHome} ${userHome}; \
 	chown -R ${apUser}:${apUser} ${logHome} ${userHome}
 
-COPY dubbo-provider-0.0.1-SNAPSHOT.jar /app.jar
+COPY target/dubbo-provider-0.0.1-SNAPSHOT.jar /app.jar
 
 USER ${apUser}
 
@@ -22,4 +24,4 @@ EXPOSE 8080
 
 VOLUME ["${logHome}"]
 
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
+CMD [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]

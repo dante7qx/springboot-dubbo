@@ -1,25 +1,17 @@
 package org.dante.springboot.dubbo.config;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import com.alibaba.dubbo.config.ApplicationConfig;
-import com.alibaba.dubbo.config.ConsumerConfig;
-import com.alibaba.dubbo.config.RegistryConfig;
-
-@Configuration
+//@Configuration
 public class DubboConfig {
 	
-	@Value("${zk.appName}")
-	private String appName;
+//	@Value("${zk.appName}")
+//	private String appName;
+//	@Value("${zk.address}")
+//	private String zkAddress;
+//	@Value("${zk.qosPort}")
+//	private int qosPort;
 	
-	@Value("${zk.address}")
-	private String zkAddress;
-	
-	@Value("${zk.qosPort}")
-	private int qosPort;
-	
+	// Java 配置
+	/**
 	@Bean
     public ApplicationConfig applicationConfig() {
         ApplicationConfig applicationConfig = new ApplicationConfig();
@@ -29,7 +21,10 @@ public class DubboConfig {
         applicationConfig.setQosPort(qosPort);
         return applicationConfig;
     }
-
+	*/
+	
+	// Java 配置
+	/**
     @Bean
     public ConsumerConfig consumerConfig() {
         ConsumerConfig consumerConfig = new ConsumerConfig();
@@ -37,7 +32,10 @@ public class DubboConfig {
         consumerConfig.setRetries(2);
         return consumerConfig;
     }
+    */
 
+	// Java 配置
+	/**
     @Bean
     public RegistryConfig registryConfig() {
         RegistryConfig registryConfig = new RegistryConfig();
@@ -46,5 +44,6 @@ public class DubboConfig {
         registryConfig.setClient("curator");
         return registryConfig;
     }
+    */
     
 }

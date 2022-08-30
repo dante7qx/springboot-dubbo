@@ -1,12 +1,22 @@
+spring:
+  application:
+    name: dubbo-registry-zookeeper-provider
 server:
   port: 8082
 logging:
   level:
     root: info
     org.dante.spring.dubbo: debug
-zk:
-  address: 127.0.0.1:2181
-#  address: 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
-#  address: spirit-dubbo-zk.caas.poc.com:30012
-  appName: consumer-test-1
-  qosPort: 22232
+dubbo:
+  application:
+    name: ${spring.application.name}
+    logger: slf4j
+    qos-enable: false
+  consumer:
+    version: 1.0.0
+    timeout: 3000
+    retries: 2
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    protocol: zookeeper
+    client: curator

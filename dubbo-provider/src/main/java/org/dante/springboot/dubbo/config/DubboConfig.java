@@ -1,48 +1,20 @@
 package org.dante.springboot.dubbo.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.apache.dubbo.config.ProtocolConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.alibaba.dubbo.config.ApplicationConfig;
-import com.alibaba.dubbo.config.ProtocolConfig;
-import com.alibaba.dubbo.config.ProviderConfig;
-import com.alibaba.dubbo.config.RegistryConfig;
-
 @Configuration
 public class DubboConfig {
 
-	@Value("${zk.address}")
-	private String zkAddress;
-	@Value("${zk.dubbo}")
-	private int zkDubbo;
-	@Value("${zk.hessian}")
-	private int zkHessian;
-	@Value("${zk.qos}")
-	private int zkQos;
+	@Value("${server.port}")
+	private int hessianPort;
+	@Value("${server.servlet.context-path}")
+	private String contextpath;
 
-	@Bean
-	public ApplicationConfig applicationConfig() {
-		ApplicationConfig applicationConfig = new ApplicationConfig();
-		applicationConfig.setId("provider-test");
-		applicationConfig.setName("provider-test");
-		applicationConfig.setQosPort(zkQos);
-		applicationConfig.setLogger("slf4j");
-		return applicationConfig;
-	}
-
-	@Bean
-	public RegistryConfig registryConfig() {
-		RegistryConfig registryConfig = new RegistryConfig();
-		registryConfig.setProtocol("zookeeper");
-		registryConfig.setAddress(zkAddress);
-		registryConfig.setClient("curator");
-		return registryConfig;
-	}
-
+	// Java 配置方式
+	/**
 	@Bean(name="dubbo")
 	public ProtocolConfig dubboProtocolConfig() {
 		ProtocolConfig protocolConfig = new ProtocolConfig();
@@ -50,17 +22,22 @@ public class DubboConfig {
 		protocolConfig.setPort(zkDubbo);
 		return protocolConfig;
 	}
+	*/
 	
-	@Bean(name="hessian")
+	// Java 配置方式
+	@Bean(name="hession")
 	public ProtocolConfig hessianProtocolConfig() {
 		ProtocolConfig protocolConfig = new ProtocolConfig();
 		protocolConfig.setName("hessian");
-		protocolConfig.setPort(zkHessian);
+		protocolConfig.setPort(hessianPort);
 		protocolConfig.setServer("servlet");
-		protocolConfig.setContextpath("/provider/hessian");
+		protocolConfig.setContextpath(contextpath);
+		protocolConfig.setSerialization("hessian2");
 		return protocolConfig;
 	}
 
+	// Java 配置方式
+	/**
 	@Bean
 	public ProviderConfig providerConfig() {
 		ProviderConfig providerConfig = new ProviderConfig();
@@ -71,5 +48,6 @@ public class DubboConfig {
 		providerConfig.setFilter("validationFilter");
 		return providerConfig;
 	}
+	*/
 
 }

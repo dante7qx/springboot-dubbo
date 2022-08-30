@@ -2,13 +2,13 @@ package org.dante.springboot.dubbo.service;
 
 import java.util.List;
 
+import org.apache.dubbo.config.annotation.DubboService;
 import org.dante.springboot.dubbo.api.service.IRestfulService;
 import org.dante.springboot.dubbo.api.vo.UserVO;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
 
-@Service(retries = 0, timeout = 3000, loadbalance = "roundrobin", protocol="dubbo")
+@DubboService(retries = 0, timeout = 3000, loadbalance = "roundrobin", protocol="dubbo")
 public class RestfulService implements IRestfulService {
 	
 	private static List<UserVO> users = Lists.newArrayList();

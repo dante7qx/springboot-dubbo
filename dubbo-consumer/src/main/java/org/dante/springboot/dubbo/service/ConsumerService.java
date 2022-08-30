@@ -2,19 +2,19 @@ package org.dante.springboot.dubbo.service;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.rpc.RpcContext;
 import org.dante.springboot.dubbo.api.service.IAnnotateService;
 import org.dante.springboot.dubbo.api.service.IRestfulService;
 import org.dante.springboot.dubbo.api.service.IUploadService;
 import org.dante.springboot.dubbo.api.vo.UserVO;
 import org.springframework.stereotype.Service;
-
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.dubbo.rpc.RpcContext;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,13 +22,13 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class ConsumerService {
 
-	@Reference(loadbalance = "roundrobin")
+	@DubboReference(loadbalance = "roundrobin")
 	private IAnnotateService annotateService;
 
-	@Reference(timeout = 2000)
+	@DubboReference(timeout = 2000)
 	private IRestfulService restfulService;
 	
-	@Reference
+	@DubboReference
 	private IUploadService uploadService;
 
 	public String sayHello(String msg) {
@@ -56,6 +56,7 @@ public class ConsumerService {
 	}
 	
 	public String upload(String fileName) throws FileNotFoundException {
-		return uploadService.upload(fileName.concat(".jpg"), new FileInputStream("/Users/dante/Documents/Project/spring/springboot-dubbo/dubbo-provider/src/main/resources/eclipse.png"));
+		InputStream is = new FileInputStream("/Users/dante/Documents/Project/java-world/springboot-dubbo/dubbo-provider/src/main/resources/eclipse.png");
+		return uploadService.upload(fileName.concat(".jpg"), is);
 	}
 }

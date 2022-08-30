@@ -7,21 +7,20 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.dante.springboot.dubbo.api.service.IUploadService;
-
-import com.alibaba.dubbo.config.annotation.Service;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Service(protocol = "hessian")
+@DubboService(protocol = "hession")
 public class UploadService implements IUploadService {
 
 	@Override
 	public String upload(String filename, InputStream file) {
 		FileOutputStream fos = null;
 		try {
-			fos = new FileOutputStream(new File("/Users/dante/Documents/Project/spring/springboot-dubbo/dubbo-provider/" + filename));
+			fos = new FileOutputStream(new File("/Users/dante/Documents/Project/java-world/springboot-dubbo/dubbo-provider/" + filename));
 			IOUtils.copy(file, fos);
 		} catch (FileNotFoundException e) {
 			log.error("FileNotFoundException", e);

@@ -3,15 +3,14 @@ package org.dante.springboot.dubbo.service;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import org.apache.dubbo.config.annotation.DubboService;
+import org.apache.dubbo.rpc.RpcContext;
 import org.dante.springboot.dubbo.api.service.IAnnotateService;
-
-import com.alibaba.dubbo.config.annotation.Service;
-import com.alibaba.dubbo.rpc.RpcContext;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Service(retries = 0, timeout = 5000, loadbalance = "roundrobin", protocol="dubbo")
+@DubboService(retries = 0, timeout = 5000, loadbalance = "roundrobin", protocol="dubbo")
 public class AnnotateService implements IAnnotateService {
 
 	@Override
